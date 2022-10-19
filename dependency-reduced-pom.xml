@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>servicebus-connector</groupId>
+  <artifactId>SparkServiceBusStreaming</artifactId>
+  <name>${project.artifactId}</name>
+  <version>1.0-SNAPSHOT</version>
+  <description>A library to aid the picking up of service bus messages in a streaming context</description>
+  <inceptionYear>2020</inceptionYear>
+  <licenses>
+    <license>
+      <name>My License</name>
+      <url>https://github.com/aspirina765</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <excludes>
+                  <exclude>org.apache.spark:*</exclude>
+                  <exclude>org.scala-lang:*</exclude>
+                </excludes>
+                <includes>
+                  <include>org.scalaj:*</include>
+                  <include>com.roundeights:*</include>
+                  <include>commons-codec:*</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>Akka Repository</id>
+      <name>Akka Repository</name>
+      <url>http://repo.akka.io/releases/</url>
+    </repository>
+    <repository>
+      <id>RoundEights</id>
+      <name>RoundEights</name>
+      <url>http://maven.spikemark.net/roundeights</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>2.12.17</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.12</artifactId>
+      <version>3.3.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming_2.12</artifactId>
+      <version>3.3.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <properties>
+    <scala.tools.version>2.12</scala.tools.version>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <scala.version>2.12.17</scala.version>
+    <encoding>UTF-8</encoding>
+  </properties>
+</project>
